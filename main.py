@@ -18,7 +18,7 @@ while True:
     choice = input()
 
     if choice == "1":
-        add_movie()
+        add_movie_cli()
     elif choice == "2":
         print(get_movies())
     elif choice == "3":
@@ -28,7 +28,7 @@ while True:
     elif choice == "5":
         print(get_movie_by_name())
     elif choice == "6":
-        print(delete_movie())
+        print(delete_movie_cli())
     elif choice == "7":
         print(update_price())
     elif choice == "8":

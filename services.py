@@ -25,7 +25,12 @@ def get_expensive_movies():
 
     return expensive_movies
 
-def add_movie():
+def add_movie(name, amount):
+    movie = Movie(name, amount)
+    movie_list.append(movie)
+    return movie
+
+def add_movie_cli():
     while True:
         name = input("Enter a name of a movie or type 'back' to enter main menu: ")
         if name == 'back':
@@ -41,8 +46,6 @@ def add_movie():
                 print("Please enter a valid number")
 
 def get_movies():
-    if not movie_list:
-        return "No movies in the list\n"
     return movie_list
 
 def get_movie_by_name():
@@ -57,7 +60,24 @@ def get_movie_by_name():
         return matches
     return f"{name} not found\n"
 
-def delete_movie():
+def delete_movie(name):
+    if not movie_list:
+        return "No movies in list to delete"
+    new_list = []
+    count = 0
+    for movie in movie_list:
+        if movie.name == name:
+            count += 1
+        else:
+            new_list.append(movie)
+    movie_list.clear()
+    movie_list.extend(new_list)
+    if count > 0:
+        return f"{count} deleted from list"
+    else:
+        return "no movies in list to delete"
+
+def delete_movie_cli():
     if not movie_list:
         return "There are no movies to delete"
     name = input("Please enter the name of a movie to delete: ")
