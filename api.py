@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from services import get_movies, add_movie, delete_movie
+from services import get_movies, add_movie, delete_movie, get_movie_name
 from pydantic import BaseModel
 
 app = FastAPI()
@@ -10,6 +10,10 @@ class MovieCreate(BaseModel):
 
 class DeleteMovie(BaseModel):
     name: str
+
+class GetMovieByName(BaseModel):
+    name: str
+    amount: int
 
 @app.get("/movies")
 def read_movies():
@@ -42,3 +46,14 @@ def post_movies(movie: MovieCreate):
 def delete_movie_from_list(movie: DeleteMovie):
     delete = delete_movie(movie.name)
     return delete
+
+@app.get("/movies/{name}")
+def get_movie_by_name(name: str):
+    movie = get_movie_name(name)
+
+    return {
+        "movie": {
+            "name": movie.name,
+            "amount": movie.amount
+        }
+    }

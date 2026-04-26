@@ -48,7 +48,15 @@ def add_movie_cli():
 def get_movies():
     return movie_list
 
-def get_movie_by_name():
+def get_movie_name(name):
+    if not movie_list:
+        return []
+    for movie in movie_list:
+        if movie.name == name:
+            return movie
+        return "No movie found"
+
+def get_movie_by_name_cli():
     if not movie_list:
         return "There are no movies to show\n"
     matches = []
@@ -66,7 +74,7 @@ def delete_movie(name):
     new_list = []
     count = 0
     for movie in movie_list:
-        if movie.name == name:
+        if movie.name.lower() == name.lower():
             count += 1
         else:
             new_list.append(movie)
